@@ -1,6 +1,7 @@
 package _383RansomNote;
 
 public class Solution {
+
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] arr = new int[26];
         for (char c : magazine.toCharArray()) {
