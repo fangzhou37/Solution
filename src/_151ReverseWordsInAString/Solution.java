@@ -1,6 +1,7 @@
 package _151ReverseWordsInAString;
 
 public class Solution {
+
     public String reverseWords(String s) {
         String trim = s.trim();
         if (trim.isEmpty()) {
