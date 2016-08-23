@@ -1,5 +1,7 @@
 package _42TrappingRainWater;
 
+import java.util.Arrays;
+
 public class Solution {
     // 对于每个柱子, 能容纳的体积为左右两边最高值取小再减去自己本身高度, min(max_left, max_- right) - height
     public int trap(int[] height) {
