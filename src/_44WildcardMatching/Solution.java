@@ -1,7 +1,7 @@
 package _44WildcardMatching;
 
 public class Solution {
-    public boolean isMatch2(String s, String p) {
+    public boolean isMatch(String s, String p) {
         // Approach 1 Split p by '*'. Do segment match, but still need backtrack
         // Approach 2 backtrack last start location
         int lastS = -1;
