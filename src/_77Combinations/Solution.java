@@ -31,4 +31,29 @@ public class Solution {
         sub.addAll(combine(n-1, k));
         return sub;
     }
+
+    public List<List<Integer>> combine2(int n, int k) {
+        List<List<Integer>> res = new LinkedList<>();
+        LinkedList<Integer> row = new LinkedList<>();
+        dfs(res, row, n, k, 1);
+        return res;
+    }
+
+    private void dfs(List<List<Integer>> res, LinkedList<Integer> row, int n, int k, int start) {
+        if (row.size() == k) {
+            res.add(new LinkedList<Integer>(row));
+            return;
+        }
+        if (start > n) {
+            return;
+        }
+        row.addLast(start);
+        dfs(res, row, n, k, start+1);   // choose the element
+        row.removeLast();
+        dfs(res, row, n, k, start+1);   // not choose it
+    }
+
+    public static void main(String[] args) {
+        new Solution().combine(4, 2);
+    }
 }
