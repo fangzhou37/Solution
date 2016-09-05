@@ -19,7 +19,7 @@ public class Solution {
                 return false;
             }
             cur = cur % pivot;  // 3432
-            pivot /= 100;    // 1000
+            pivot /= 100;    // 100
             cur /= 10;  // 343
         }
         return true;
