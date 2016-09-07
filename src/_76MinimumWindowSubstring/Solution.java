@@ -45,7 +45,7 @@ public class Solution {
                 }
             }
         }
-        if (count != 0) {
+        if (count != 0) {   // 别忘了找不到window的情况
             return "";
         }
         return res;
