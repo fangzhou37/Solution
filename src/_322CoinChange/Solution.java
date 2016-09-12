@@ -5,20 +5,23 @@ import java.util.Arrays;
 public class Solution {
     public int coinChange(int[] coins, int amount) {
         Arrays.sort(coins);
-        int[] m = new int[amount+1];
-        for (int i = 1; i < m.length; i++) {
-            m[i] = Integer.MAX_VALUE;
-            int potentialCandid = Arrays.binarySearch(coins, i);
-            if (potentialCandid < 0) {
-                potentialCandid = -(potentialCandid+1);
+        int[] minChange = new int[amount+1];
+        for (int curAmount = 1; curAmount < minChange.length; curAmount++) {
+            minChange[curAmount] = Integer.MAX_VALUE;
+            int potentialCoinIndex = Arrays.binarySearch(coins, curAmount);
+            if (potentialCoinIndex < 0) {
+                potentialCoinIndex = -(potentialCoinIndex+1);
             }
-            for (int j = potentialCandid; j >= 0; j--) {
-                if (i >= coins[j]) {
-                    m[i] = Math.min(m[i-coins[j]] + 1, m[i]);
+            if (potentialCoinIndex >= coins.length) {
+                potentialCoinIndex--;
+            }
+            for (int j = potentialCoinIndex; j >= 0; j--) {
+                if (curAmount >= coins[j] && minChange[curAmount-coins[j]] != Integer.MAX_VALUE) {
+                    minChange[curAmount] = Math.min(minChange[curAmount-coins[j]] + 1, minChange[curAmount]);
                 }
             }
         }
-        return m[amount];
+        return minChange[amount] == Integer.MAX_VALUE ? -1 : minChange[amount];
     }
 
     public static void main(String[] args) {
