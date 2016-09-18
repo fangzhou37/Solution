@@ -8,37 +8,23 @@ public class Solution {
         if (nums.length == 1) {
             return nums[0];
         }
-        if (nums.length == 2) {
-            return Math.max(nums[0], nums[1]);
-        }
-        for (int i = 0; i < nums.length; i++) {
-            int i_2 = i >= 2 ? i-2 : i;
-            int i_3 = i >= 3 ? i-3 : i;
-            if (!isAdj(nums.length, i, i_2)) {
-                if (!isAdj(nums.length, i, i_3)) {
-                    nums[i] += Math.max(nums[i_2], nums[i_3]);
-                } else {
-                    nums[i] += nums[i_2];
-                }
+        int[] startFromFirstHouse = new int[nums.length + 1];
+        int[] startFromSecondHouse = new int[nums.length + 1];
+        startFromFirstHouse[1] = nums[0];
+        startFromSecondHouse[2] = nums[1];
+        int max = Math.max(nums[0], nums[1]);   // 容易漏掉前两个屋
+        for (int i = 3; i <= nums.length; i++) {
+            if (i != nums.length) {
+                startFromFirstHouse[i] = Math.max(startFromFirstHouse[i - 2], startFromFirstHouse[i - 3]) + nums[i - 1];
+                max = Math.max(max, startFromFirstHouse[i]);
             }
+            startFromSecondHouse[i] = Math.max(startFromSecondHouse[i - 2], startFromSecondHouse[i - 3]) + nums[i - 1];
+            max = Math.max(max, startFromSecondHouse[i]);   // 与其在最后判断那个是最大,不如每层都判断,保证不遗漏
         }
-        return Math.max(nums[nums.length-1], nums[nums.length-2]);
-    }
-
-    private boolean isAdj(int n, int i, int j) {
-        if (Math.abs(j - i) < 2) {
-            return true;
-        }
-        if (i == 0 && j == n-1) {
-            return true;
-        }
-        if (i == n-1 && j == 0) {
-            return true;
-        }
-        return false;
+        return max;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().rob(new int[] {1,2,3,4}));
+        System.out.println(new Solution().rob(new int[] {1,3,1}));
     }
 }
