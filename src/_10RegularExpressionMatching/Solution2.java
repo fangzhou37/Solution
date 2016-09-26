@@ -17,7 +17,7 @@ public class Solution2 {
         boolean[][] m = new boolean[s.length() + 1][p.length() + 1];
         // m[i][0] = false for all i != 0
         m[0][0] = true;
-        for (int j = 2; j <= p.length(); j++) {
+        for (int j = 2; j <= p.length(); j++) { // 易错,j从2开始,也就是从第二个字符开始找'*'
             if (p.charAt(j-1) == '*') {
                 m[0][j] = m[0][j-2];
             }
