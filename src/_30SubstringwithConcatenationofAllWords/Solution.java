@@ -8,6 +8,8 @@ public class Solution {
         if (words.length == 0) {
             return res;
         }
+
+        // 找到window的表示方式, 由于words可以有重复,set不合适,所以用map
         Map<String, Integer> dict = new HashMap<>();
         for (String word : words) {
             increaseEntry(dict, word);
