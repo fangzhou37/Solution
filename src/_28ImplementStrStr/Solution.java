@@ -8,13 +8,13 @@ public class Solution {
         char[] hay = haystack.toCharArray();
         char[] nee = needle.toCharArray();
         for (int start = 0; start < hay.length && start + nee.length <= hay.length; start++) {
-            int j = 0;
-            for (; start + j < hay.length && j < nee.length; j++) {
-                if (hay[start + j] != nee[j]) {
+            int runner = 0;
+            for (; start + runner < hay.length && runner < nee.length; runner++) {
+                if (hay[start + runner] != nee[runner]) {
                     break;
                 }
             }
-            if (j == nee.length) {
+            if (runner == nee.length) {
                 return start;
             }
         }
