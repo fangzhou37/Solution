@@ -1,0 +1,29 @@
+package _97InterleavingString;
+
+public class Solution2 {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        if (s1.length() + s2.length() != s3.length()) {
+            return false;
+        }
+        boolean[][] m = new boolean[s1.length()+1][s2.length()+1];
+        for (int j = 1; j < s2.length()+1; j++) {
+            m[0][j] = s2.substring(0, j).equals(s3.substring(0, j));
+        }
+        for (int i = 1; i < s1.length()+1; i++) {
+            m[i][0] = s1.substring(0, i).equals(s3.substring(0, i));
+        }
+        m[0][0] = true;
+        for (int i = 1; i < s1.length()+1; i++) {
+            for (int j = 1; j < s2.length()+1; j++) {
+                char c1 = s1.charAt(i-1), c2 = s2.charAt(j-1), c3 = s3.charAt(i+j-1);
+                if (c1 == c3) {
+                    m[i][j] |= m[i-1][j];
+                }
+                if (c2 == c3) {
+                    m[i][j] |= m[i][j-1];
+                }
+            }
+        }
+        return m[s1.length()][s2.length()];
+    }
+}
