@@ -6,32 +6,28 @@ public class Solution2 {
             boolean[] row = new boolean[9];
             boolean[] col = new boolean[9];
             boolean[] block = new boolean[9];
-            for (int j = 0; j < 9; j++) {   // all j columns of row i
-                if (board[i][j] != '.') {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.') {   // all j columns of row i
                     int num = board[i][j] - '1';
                     if (row[num]) {
                         return false;
                     }
                     row[num] = true;
                 }
-            }
 
-            for (int j = 0; j < 9; j++) {   // all j rows of column i
-                if (board[j][i] != '.') {
+                if (board[j][i] != '.') {   // all j rows of column i
                     int num = board[j][i] - '1';
                     if (col[num]) {
                         return false;
                     }
                     col[num] = true;
                 }
-            }
 
-            int startRowOfThisBlock = i/3*3;
-            int startColOfThisBlock = i%3*3;
-            for (int j = 0; j < 9; j++) {   // all j columns of row i
-                int x = startRowOfThisBlock + j/3;
-                int y = startColOfThisBlock + j%3;
-                if (board[x][y] != '.') {
+                int startRowOfThisBlock = i / 3 * 3;
+                int startColOfThisBlock = i % 3 * 3;
+                int x = startRowOfThisBlock + j / 3;
+                int y = startColOfThisBlock + j % 3;
+                if (board[x][y] != '.') {   // all j columns of row i
                     int num = board[x][y] - '1';
                     if (block[num]) {
                         return false;
