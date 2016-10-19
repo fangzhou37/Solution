@@ -3,6 +3,17 @@ package OrderDish;
 import java.util.*;
 
 public class Solution {
+    /*
+一个餐馆，菜单上各种食物价格如下
+A， $ X.XX
+B， $ Y.YY
+C， $ Z.ZZ
+D,  $ ...
+
+问现在一个人有 一定数额的钱，比如 $MM.MM，如何点菜才能把钱全部花完？
+面试官要求列出所有可能的组合
+    * */
+
     class Dish {
         public Dish(String name, float price) {
             this.name = name;
@@ -12,6 +23,7 @@ public class Solution {
         String name;
         float price;
     }
+
     public List<List<String>> getPlans(String[] names, float[] prices, float target) {
         List<Dish> menu = new ArrayList<>(names.length);
         for (int i = 0; i < names.length; i++) {
