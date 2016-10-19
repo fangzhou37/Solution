@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class Solution {
+    // http://www.mitbbs.com/article_t/JobHunting/32950985.html
     public List<Integer> sort(List<Integer> nums, int k) {
         PriorityQueue<Integer> queue = new PriorityQueue<>();
         List<Integer> res = new LinkedList<>();
