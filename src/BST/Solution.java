@@ -62,6 +62,7 @@ class BST {
         Node cur = root, pre = root;
         if (root != null && root.data == value) {
             root = deleteThisNodeAndSelectReplacement(root);
+            return true;
         }
         boolean isLeft = true;
         while (true) {
@@ -97,23 +98,23 @@ class BST {
         if (cur.right == null) {
             return cur.left;
         }
-        Node newRoot = deleteAndGetLargest(cur.left);
-        if (newRoot != cur.left) {
-            newRoot.left = cur.left;
+        Node newRoot;
+        if (cur.left.right == null) {
+            newRoot = cur.left;
         } else {
-            newRoot.left = null;
+            newRoot = deleteAndGetLargest(cur.left, null);
+            newRoot.left = cur.left;
         }
         newRoot.right = cur.right;
         return newRoot;
     }
 
-    private Node deleteAndGetLargest(Node cur) {
-        if (cur.right == null) {
-            return cur.left;
+    private Node deleteAndGetLargest(Node cur, Node prev) {
+        if (cur.right == null) {    // cur is largest
+            prev.right = cur.left;	// delete cur from prev’s right branch
+            return cur;		// return largest element
         }
-        Node thisLayerRoot = cur;
-        cur.right = deleteAndGetLargest(thisLayerRoot.right);
-        return thisLayerRoot;
+        return deleteAndGetLargest(cur.right, cur);
     }
 
     public List<Integer> printTree() {
@@ -136,7 +137,7 @@ public class Solution {
     public static void main(String[] args) {
         BST bst = new BST();
         List<Integer> arr = new ArrayList<>();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 10; i++) {
             arr.add(i);
         }
         Collections.shuffle(arr);
@@ -145,8 +146,11 @@ public class Solution {
             System.out.println(bst.printTree());
         }
         System.out.println("----------------------------");
-        for (int i = 1; i <= 20; i++) {
-            bst.delete(i);
+        Collections.shuffle(arr);
+        System.out.println(bst.printTree());
+        for (int i = 1; i <= 10; i++) {
+            System.out.println("Delete: " + arr.get(i-1));
+            bst.delete(arr.get(i-1));
             System.out.println(bst.printTree());
         }
     }
