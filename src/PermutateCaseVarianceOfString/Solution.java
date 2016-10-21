@@ -17,7 +17,7 @@ public class Solution {
             return;
         }
         backTracking(cs, i+1, res);
-        if (!Character.isAlphabetic(cs[i])) {
+        if (!Character.isLetter(cs[i])) {
             return;
         }
         if (Character.isLowerCase(cs[i])) {
