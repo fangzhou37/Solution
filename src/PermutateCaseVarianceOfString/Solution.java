@@ -17,6 +17,9 @@ public class Solution {
             return;
         }
         backTracking(cs, i+1, res);
+        if (!Character.isAlphabetic(cs[i])) {
+            return;
+        }
         if (Character.isLowerCase(cs[i])) {
             cs[i] = Character.toUpperCase(cs[i]);
             backTracking(cs, i+1, res);
@@ -29,6 +32,6 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().permute("abc"));
+        System.out.println(new Solution().permute("141ab1c23"));
     }
 }
