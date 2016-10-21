@@ -13,7 +13,10 @@ public class Solution {
 
     private void backTracking(char[] cs, int i, List<String> res) {
         if (i == cs.length) {
-            res.add(new String(cs));
+            String token = new String(cs);
+            if (isValid(token)) {
+                res.add(new String(cs));
+            }
             return;
         }
         backTracking(cs, i+1, res);
@@ -31,6 +34,18 @@ public class Solution {
         }
     }
 
+    private boolean isValid(String token) {
+        try {
+            Integer res = decode(token);
+            return res != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private Integer decode(String token) {
+        return 0;
+    }
     public static void main(String[] args) {
         System.out.println(new Solution().permute("141ab1c23"));
     }
