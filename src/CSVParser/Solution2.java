@@ -14,42 +14,36 @@ Jane|Roberts|janer@msn.com|San Francisco, CA|0
 Alexandra "Alex"|Menendez|alex.menendez@gmail.com|Miami|1
 "Alexandra Alex"
 */
-    public static String parseCSV(String s) {
-        StringBuffer res = new StringBuffer();
-        int start = 0;
-        boolean inQuote = false;
-        /**
-         * 情况:
-         *      当前是否在quote中
-         *      如果是:
-         *       当前是否是',' 或者是最后一个元素
-         *       当前是否是'"'
-         *      如果否:
-         *       当前是否是'"'
-         *      */
-        for (int i = 0; i < s.length(); i++) {
-            if (!inQuote || i == s.length()-1) {
-                if (s.charAt(i) == ',' || i == s.length()-1) {
-                    if (res.length() != 0) {
-                        res.append('|');
-                    }
+public static String parseCSV(String s) {
+    StringBuffer res = new StringBuffer();
+    int start = 0;
+    boolean inQuote = false;
+    /**
+     * 情况:
+     *      当前是否在quote中
+     *      如果否:
+     *       当前是否是',' 或者是最后一个元素
+     *      */
+    for (int i = 0; i < s.length(); i++) {
+        if (!inQuote || i == s.length() - 1) {
+            if (s.charAt(i) == ',' || i == s.length() - 1) {
+                if (res.length() != 0) {
+                    res.append('|');
+                }
 
-                    // 如果当前是最后一个元素,直接取当前段开始parse
-                    // 如果当前是',',略过这个符号,取前面一段开始parse
-                    int end = i == s.length()-1 ? s.length()-1 : i-1;
-                    res.append(parseField(s, start, end));
-                    start = i+1;
-                } else if (s.charAt(i) == '"') {
-                    inQuote = !inQuote;
-                }
-            } else {
-                if (s.charAt(i) == '"') {
-                    inQuote = !inQuote;
-                }
+                // 如果当前是最后一个元素,直接取当前段开始parse
+                // 如果当前是',',略过这个符号,取前面一段开始parse
+                int end = i == s.length() - 1 ? s.length() - 1 : i - 1;
+                res.append(parseField(s, start, end));
+                start = i + 1;    // jump over comma and space
             }
         }
-        return res.toString();
+        if (s.charAt(i) == '"') {
+            inQuote = !inQuote;
+        }
     }
+    return res.toString();
+}
 
     // 1. remove head and tail quote if present
     // 2. reduce double quote if present

@@ -21,15 +21,14 @@ public class Solution3 {
         for (int i = 1; i < s.length()-1; i++) {    // ignore head '[' and tail ']'
             if (!inQuote) {
                 if (s.charAt(i) == '[') {
-                    start = i+1;
+                    start = i + 1;
                 } else if (s.charAt(i) == ']') {
                     res.add(parseCSVLine(s.substring(start, i)));
-                    start = i+1;
+                    start = i + 1;
                 }
-            } else {
-                if (s.charAt(i) == '\'') {
-                    inQuote = !inQuote;
-                }
+            }
+            if (s.charAt(i) == '\'') {
+                inQuote = !inQuote;
             }
         }
         return res;
@@ -42,31 +41,25 @@ public class Solution3 {
         /**
          * 情况:
          *      当前是否在quote中
-         *      如果是:
-         *       当前是否是',' 或者是最后一个元素
-         *       当前是否是'\''
          *      如果否:
-         *       当前是否是'\''
+         *       当前是否是',' 或者是最后一个元素
          *      */
         for (int i = 0; i < s.length(); i++) {
-            if (!inQuote || i == s.length()-1) {
-                if (s.charAt(i) == ',' || i == s.length()-1) {
+            if (!inQuote || i == s.length() - 1) {
+                if (s.charAt(i) == ',' || i == s.length() - 1) {
                     if (res.length() != 0) {
                         res.append('|');
                     }
 
                     // 如果当前是最后一个元素,直接取当前段开始parse
                     // 如果当前是',',略过这个符号,取前面一段开始parse
-                    int end = i == s.length()-1 ? s.length()-1 : i-1;
+                    int end = i == s.length() - 1 ? s.length() - 1 : i - 1;
                     res.append(parseField(s, start, end));
-                    start = i+2;    // jump over comma and space
-                } else if (s.charAt(i) == '\'') {
-                    inQuote = !inQuote;
+                    start = i + 2;    // jump over comma and space
                 }
-            } else {
-                if (s.charAt(i) == '\'') {
-                    inQuote = !inQuote;
-                }
+            }
+            if (s.charAt(i) == '\'') {
+                inQuote = !inQuote;
             }
         }
         return res.toString();
@@ -75,16 +68,16 @@ public class Solution3 {
     // 1. remove head and tail quote if present
     // 2. reduce double quote if present
     private static String parseField(String s, int start, int cur) {
-        if (s.charAt(start) == '\'') {
+        if (s.charAt(start) == '\'' && s.charAt(cur) == '\'') {
             start++;
             cur--;
         }
         StringBuffer sb = new StringBuffer();
         for (int i = start; i <= cur; i++) {
-            if (s.charAt(i) == '"' && i+1 <= cur && s.charAt(i+1) == '"') {
+            if (s.charAt(i) == '"' && i+1 <= cur && s.charAt(i+1) == '"') { // reduce double quote: "
                 sb.append('"');
                 i++;
-            } else if (s.charAt(i) == '\'' && i+1 <= cur && s.charAt(i+1) == '\'') {
+            } else if (s.charAt(i) == '\'' && i+1 <= cur && s.charAt(i+1) == '\'') { // reduce double quote: '
                 sb.append('\'');
                 i++;
             } else {
@@ -108,5 +101,6 @@ public class Solution3 {
                 "['Jane', 'Roberts', 'janer@msn.com', 'San Francisco, CA', '0']," +
                 "['Alexandra \'\'\"\"Alex\"\"\'\'', 'Menendez', 'alex.menendez@gmail.com', 'Miami', '1']]";
         System.out.println(parseCSV(input));
+        System.out.println("[John|Smith|john.smith@gmail.com|Los Angeles|1, Jane|Roberts|janer@msn.com|San Francisco, CA|0, Alexandra '\"Alex\"'|Menendez|alex.menendez@gmail.com|Miami|1]");
     }
 }
