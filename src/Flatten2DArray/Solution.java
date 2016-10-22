@@ -18,7 +18,7 @@ public class Solution {
                 return false;
             }
         }
-        return mColIter.hasNext();
+        return mColIter != null && mColIter.hasNext();
     }
 
     public Integer next() {

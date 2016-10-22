@@ -149,8 +149,11 @@ public class Solution {
         Collections.shuffle(arr);
         System.out.println(bst.printTree());
         for (int i = 1; i <= 10; i++) {
-            System.out.println("Delete: " + arr.get(i-1));
-            bst.delete(arr.get(i-1));
+            int value = arr.get(i-1);
+            System.out.println("Try to find: " + value + ". Result: " + bst.search(value));
+            System.out.println("Delete: " + value);
+            bst.delete(value);
+            System.out.println("Try to find: " + value + ". Result: " + bst.search(value));
             System.out.println(bst.printTree());
         }
     }
