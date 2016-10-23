@@ -25,9 +25,9 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String s1 = "1231231";
-        String s2 = "234234";
+        String s1 = "9347564869999";
+        String s2 = "999125999";
         System.out.println(solution.add(s1,s2));
-        System.out.println(Integer.valueOf(s1) + Integer.valueOf(s2));
+        System.out.println(Long.valueOf(s1) + Long.valueOf(s2));
     }
 }
