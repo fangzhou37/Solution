@@ -1,8 +1,11 @@
 package Snapchat.MyArrayList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-class MyArrayList<T>{
+class MyArrayList<T> {
     private int mInd;
     T[] arr;
 
@@ -104,6 +107,25 @@ class MyArrayList<T>{
 public class Solution {
     public static void main(String[] args) {
         MyArrayList<Integer> arrList = new MyArrayList<Integer>(2);
+        List<Integer> realList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            arrList.add(i);
+            realList.add(i);
+            System.out.println(arrList);
+        }
+        for (int i = -1; i >= -10; i--) {
+            arrList.add(0, i);
+            realList.add(i);
+            System.out.println(arrList);
+        }
+
+        System.out.println("Gradually remove elements, one by one.");
+        int size = arrList.size();
+        for (int i = 0; i < size; i++) {
+            arrList.remove(0);
+            System.out.println(arrList);
+        }
+
         for (int i = 0; i < 10; i++) {
             arrList.add(i);
             System.out.println(arrList);
@@ -112,9 +134,11 @@ public class Solution {
             arrList.add(0, i);
             System.out.println(arrList);
         }
-        int size = arrList.size();
-        for (int i = 0; i < size; i++) {
-            arrList.remove(0);
+        System.out.println("Gradually randomly remove elements, one by one.");
+        Collections.shuffle(realList);
+        for (Integer i : realList) {
+            System.out.println("Remove: " + i);
+            arrList.removeObject(i);
             System.out.println(arrList);
         }
     }
