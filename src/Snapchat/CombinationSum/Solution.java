@@ -10,13 +10,29 @@ public class Solution {
         Arrays.sort(candidates);
         List<List<Integer>> res = new LinkedList<>();
         LinkedList<Integer> buffer = new LinkedList<>();
-        dfs(candidates, 0, buffer, target, 0, res);
+        //dfs(candidates, 0, buffer, target, 0, res);
+        dfs(candidates, buffer, target, 0, res);
         return res;
     }
 
-    private void dfs(int[] candidates, int i, LinkedList<Integer> buffer, int target, int curSum, List<List<Integer>> res) {
+    private void dfs(int[] candidates, LinkedList<Integer> buffer, int target, int curSum, List<List<Integer>> res) {
         if (target == curSum) {
-            res.add(new LinkedList<Integer>(buffer));
+            res.add(new LinkedList<>(buffer));
+            return;
+        }
+        for (int candidate : candidates) {
+            if (candidate + curSum > target) {
+                continue;
+            }
+            buffer.addLast(candidate);
+            dfs(candidates, buffer, target, curSum + candidate, res);
+            buffer.removeLast();
+        }
+    }
+
+    /*private void dfs(int[] candidates, int i, LinkedList<Integer> buffer, int target, int curSum, List<List<Integer>> res) {
+        if (target == curSum) {
+            res.add(new LinkedList<>(buffer));
             return;
         }
         if (i >= candidates.length) {
@@ -30,9 +46,10 @@ public class Solution {
         buffer.addLast(candidates[i]);
         dfs(candidates, i, buffer, target, curSum + candidates[i], res);
         buffer.removeLast();
-    }
+    }*/
 
     public static void main(String[] args) {
-
+        int[] arr = new int[] {1,3};
+        System.out.println(new Solution().combinationSum(arr, 5));
     }
 }
