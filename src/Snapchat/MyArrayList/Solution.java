@@ -49,9 +49,10 @@ class MyArrayList<T> {
 
     public void add(int index, T element) {
         ensureCapacity(mInd + 1);
+        mInd++;
+        rangeCheck(index);
         System.arraycopy(arr, index, arr, index+1, mInd - index);
         arr[index] = element;
-        mInd++;
     }
 
     public T remove(int index) {
@@ -126,6 +127,7 @@ public class Solution {
             System.out.println(arrList);
         }
 
+        // Re-add
         for (int i = 0; i < 10; i++) {
             arrList.add(i);
             System.out.println(arrList);
