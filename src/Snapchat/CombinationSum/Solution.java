@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Solution {
+    // 非正数怎么办?  很有可能会出现无穷多解法
     // 数字可以重复无限次使用
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         Arrays.sort(candidates);
