@@ -48,16 +48,6 @@ public class Solution2 {
         System.out.println(new Solution2().reverseWords1("  hi   there How are you  ".toCharArray()));
     }
 
-    private void reverse(char[] cs, int i, int j) {
-        while (i < j) {
-            char t = cs[i];
-            cs[i] = cs[j];
-            cs[j] = t;
-            i++;
-            j--;
-        }
-    }
-
     private char[] trim(char[] cs) {
         int i = 0;
         for (; i < cs.length; i++) {
