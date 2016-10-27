@@ -15,7 +15,7 @@ public class Solution2 {
 
     private void dfs(int[] candidates, int i, LinkedList<Integer> buffer, int target, int curSum, List<List<Integer>> res) {
         if (target == curSum) {
-            res.add(new LinkedList<Integer>(buffer));
+            res.add(new LinkedList<>(buffer));
             return;
         }
         if (i >= candidates.length) {
