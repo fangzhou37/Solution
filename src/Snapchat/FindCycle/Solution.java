@@ -40,6 +40,9 @@ public class Solution {
 
     // 有向图有环 == 从每个root开始的dfs有back edge
     public boolean hasCycle(List<Node> graph) {
+        if (graph.isEmpty()) {
+            return false;
+        }
         Set<Node> inStack = new HashSet<>(graph.size());
         Set<Node> zeroDegreeNodes = new HashSet<>(graph);
         for (Node n : graph) {
