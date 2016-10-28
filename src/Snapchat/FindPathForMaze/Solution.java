@@ -1,4 +1,4 @@
-package Snapchat.FindPath;
+package Snapchat.FindPathForMaze;
 
 import java.util.LinkedList;
 import java.util.Queue;
