@@ -17,6 +17,9 @@ public class Solution {
     }
 
     public int getDistance(String s) {
+        if (s.isEmpty()) {
+            return 0;
+        }
         int[][] m = new int[s.length()][s.length()];
         for (int i = 0; i < s.length(); i++) {
             for (int j = i; j < s.length(); j++) {
@@ -29,8 +32,23 @@ public class Solution {
                 }
             }
         }
-        for (int len = 0; len < s.length(); len++) {
+        for (int len = 2; len <= s.length(); len++) {   // 注意是小于等于
+            for (int i = 0; i + len - 1 < s.length() && i < s.length(); i++) {
+                int j = i + len - 1;    // 易错
+                if (s.charAt(i) == s.charAt(j)) {
+                    m[i][j] = Math.min(m[i][j], m[i+1][j-1]);
+                }
 
+                if (m[i][j-1] < Integer.MAX_VALUE) {
+                    m[i][j] = Math.min(m[i][j], m[i][j - 1] + 1);
+                }
+                if (m[i+1][j] < Integer.MAX_VALUE) {
+                    m[i][j] = Math.min(m[i][j], m[i+1][j] + 1);
+                }
+                if (m[i + 1][j - 1] < Integer.MAX_VALUE) {
+                    m[i][j] = Math.min(m[i][j], m[i + 1][j - 1] + 1);
+                }
+            }
         }
         return m[0][s.length()-1];
     }
@@ -44,5 +62,19 @@ public class Solution {
         System.out.println(new Solution().isPalindrom("aabcbaa"));
         System.out.println(new Solution().isPalindrom("aabbaa"));
         System.out.println(new Solution().isPalindrom("aebaa"));
+
+
+        System.out.println(new Solution().getDistance("aebaa"));
+        System.out.println(new Solution().getDistance("ebabc"));
+        System.out.println(new Solution().getDistance("babcdeb"));
+        System.out.println(new Solution().getDistance("a"));
+        System.out.println(new Solution().getDistance("ab"));
+        System.out.println(new Solution().getDistance("abc"));
+        System.out.println(new Solution().getDistance("aba"));
+        System.out.println(new Solution().getDistance(""));
+        System.out.println(new Solution().getDistance("abcdefg"));
+        System.out.println(new Solution().getDistance("abcdefgh"));
+        System.out.println(new Solution().getDistance("abcddfgh"));
+        System.out.println(new Solution().getDistance("abddfgh"));
     }
 }
