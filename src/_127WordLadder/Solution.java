@@ -1,5 +1,6 @@
 package _127WordLadder;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,6 +56,6 @@ public class Solution {
         dict.add("log");
         dict.add("a");
         dict.add("c");
-        System.out.println(new Solution().ladderLength("hit", "cog", dict));
+        System.out.println(new Solution().ladderLength("hot", "dog", dict));
     }
 }
