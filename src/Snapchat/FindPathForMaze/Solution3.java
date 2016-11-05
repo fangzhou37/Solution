@@ -17,7 +17,7 @@ public class Solution3 {
 
     private int[][] directions = new int[][]{{-1,0},{0,-1},{1,0},{0,1}};
 
-    // DFS
+    // BFS
     public boolean havePath(int[][] matrix){
         if (matrix.length == 0 || matrix[0].length == 0) {
             return false;
