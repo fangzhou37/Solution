@@ -1,4 +1,4 @@
-package ThreeOperationCalculation;
+package Snapchat2.ThreeOperationCalculation;
 
 public class TreeNode {
     Boolean val;
