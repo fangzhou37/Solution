@@ -7,7 +7,20 @@ import java.util.List;
 public class Solution {
     // 非正数怎么办?  很有可能会出现无穷多解法
     // 数字可以重复无限次使用
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public int combinationSum(int[] candidates, int target) {
+        int[] solution = new int[target + 1];
+        solution[0] = 1;
+        for (int i = 1; i <= target; i++) {
+            for (int candidate : candidates) {
+                if (i - candidate >= 0) {
+                    solution[i] += solution[i - candidate];
+                }
+            }
+        }
+        return solution[target];
+    }
+
+    public List<List<Integer>> combinationSum1(int[] candidates, int target) {
         Arrays.sort(candidates);
         List<List<Integer>> res = new LinkedList<>();
         LinkedList<Integer> buffer = new LinkedList<>();
@@ -50,7 +63,7 @@ public class Solution {
     }*/
 
     public static void main(String[] args) {
-        int[] arr = new int[] {1,3};
-        System.out.println(new Solution().combinationSum(arr, 5));
+        int[] arr = new int[] {1,2,3};
+        System.out.println(new Solution().combinationSum(arr, 4));
     }
 }

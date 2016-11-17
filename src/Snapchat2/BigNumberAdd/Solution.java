@@ -73,28 +73,70 @@ public class Solution {
         return sb.reverse().toString();
     }
 
+    public String minus(String s1, String s2){
+        String sign = "";
+        if (isSmaller(s1, s2)) {
+            sign = "-";
+            String t = s1;
+            s1 = s2;
+            s2 = t;
+        }
+        StringBuffer sb = new StringBuffer();
+        int carry = 0;
+        s1 = new StringBuffer(s1).reverse().toString();
+        s2 = new StringBuffer(s2).reverse().toString();
+
+        int i = 0;
+        for (; i < s1.length(); i++) {
+            carry += (s1.charAt(i) - '0');
+            if (i < s2.length()) {
+                carry -= s2.charAt(i) - '0';
+            }
+            if (carry < 0) {
+                sb.append(carry + 10);
+                carry = -1;
+            } else {
+                sb.append(carry);
+                carry = 0;
+            }
+        }
+        return sign + sb.reverse().toString();
+    }
+
+    private boolean isSmaller(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return s1.length() < s2.length();
+        }
+        return s1.compareTo(s2) < 0;
+    }
+
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println(s.addIncludeDot("0", "0"));
-        System.out.println(s.addIncludeDot("0", "0.0"));
-        System.out.println(s.addIncludeDot("1", "0.0"));
-        System.out.println(s.addIncludeDot("1", "1.2"));
-        System.out.println(s.addIncludeDot("1.9", "1.2"));
-        System.out.println(s.addIncludeDot("1.91", "1.2"));
-        System.out.println(s.addIncludeDot("1.988", "1.22"));
-        System.out.println(s.addIncludeDot("1.988", "151.22"));
-        System.out.println(s.addIncludeDot("113456.981238", "151.22"));
-        System.out.println(s.addIncludeDot("113456.981238", "56474.568562"));
+        //System.out.println(s.addIncludeDot("0", "0"));
+        //System.out.println(s.addIncludeDot("0", "0.0"));
+        //System.out.println(s.addIncludeDot("1", "0.0"));
+        //System.out.println(s.addIncludeDot("1", "1.2"));
+        //System.out.println(s.addIncludeDot("1.9", "1.2"));
+        //System.out.println(s.addIncludeDot("1.91", "1.2"));
+        //System.out.println(s.addIncludeDot("1.988", "1.22"));
+        //System.out.println(s.addIncludeDot("1.988", "151.22"));
+        //System.out.println(s.addIncludeDot("113456.981238", "151.22"));
+        //System.out.println(s.addIncludeDot("113456.981238", "56474.568562"));
 
-        System.out.println(Double.valueOf("0") + Double.valueOf("0"));
-        System.out.println(Double.valueOf("0") + Double.valueOf("0.0"));
-        System.out.println(Double.valueOf("1") + Double.valueOf("0.0"));
-        System.out.println(Double.valueOf("1") + Double.valueOf("1.2"));
-        System.out.println(Double.valueOf("1.9") + Double.valueOf("1.2"));
-        System.out.println(Double.valueOf("1.91") + Double.valueOf("1.2"));
-        System.out.println(Double.valueOf("1.988") + Double.valueOf("1.22"));
-        System.out.println(Double.valueOf("1.988") + Double.valueOf("151.22"));
-        System.out.println(Double.valueOf("113456.981238") + Double.valueOf("151.22"));
-        System.out.println(Double.valueOf("113456.981238") + Double.valueOf("56474.568562"));
+        //System.out.println(Double.valueOf("0") + Double.valueOf("0"));
+        //System.out.println(Double.valueOf("0") + Double.valueOf("0.0"));
+        //System.out.println(Double.valueOf("1") + Double.valueOf("0.0"));
+        //System.out.println(Double.valueOf("1") + Double.valueOf("1.2"));
+        //System.out.println(Double.valueOf("1.9") + Double.valueOf("1.2"));
+        //System.out.println(Double.valueOf("1.91") + Double.valueOf("1.2"));
+        //System.out.println(Double.valueOf("1.988") + Double.valueOf("1.22"));
+        //System.out.println(Double.valueOf("1.988") + Double.valueOf("151.22"));
+        //System.out.println(Double.valueOf("113456.981238") + Double.valueOf("151.22"));
+        //System.out.println(Double.valueOf("113456.981238") + Double.valueOf("56474.568562"));
+
+        System.out.println(s.minus("1912", "4826") + ", " + (1912 - 4826));
+        System.out.println(s.minus("1312", "4826") + ", " + (1312 - 4826));
+        System.out.println(s.minus("312", "4826") + ", " + (312 - 4826));
+        System.out.println(s.minus("4826", "312") + ", " + (4826 - 312));
     }
 }
